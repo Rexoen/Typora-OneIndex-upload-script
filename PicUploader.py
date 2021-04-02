@@ -20,18 +20,12 @@ def upload(imgfile):
     multipart_encoder = MultipartEncoder(
     fields={
         'file': (os.path.basename(imgfile) , open(imgfile, 'rb'), 'application/octet-stream')
-        #file为路径
         },
         boundary=boundary
     )
     
     headers['Content-Type'] = multipart_encoder.content_type
-    #请求头必须包含一个特殊的头信息，类似于Content-Type: multipart/form-data; boundary=${bound}
-    
     r = requests.post(url, data=multipart_encoder, headers=headers)
-    #print(r.text)
-    with open('debug.html','w') as f:
-        f.write(r.text)
     selector = etree.HTML(r.text)
     external_link = selector.xpath("/html/body/div/div/div[1]/input/@value")[0]
     print(external_link)

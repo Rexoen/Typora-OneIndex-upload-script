@@ -43,7 +43,7 @@ chmod u+x PicUploader.py
 
 
 
-### 4. 测试
+### 5. 测试
 
 点击`验证图片上传选项`按钮进行测试
 
@@ -51,7 +51,7 @@ chmod u+x PicUploader.py
 
 
 
-### 5. 使用
+### 6. 使用
 
 ![image-20210402233611983](https://x.lod.pub:8085/images/2021/04/02/87QbrLdhOP/image-20210402233611983.png)
 

@@ -1,7 +1,5 @@
 # Typora OneIndex upload script
 
-
-
 ## 介绍
 
 自动上传图片到 OneIndex 服务的 Typora 脚本
@@ -10,13 +8,17 @@
 
 ### 1. 下载
 
-- 下载本仓库中的`PicUploader.py`
+- 下载[本仓库](https://github.com/JeroGC/Typora-OneIndex-upload-script)中的`PicUploader.py`
 
-### 2. OneIndex 配置
+### 2. 依赖包安装
+
+`python3 -m pip install requests lxml requests_toolbelt`
+
+### 3. OneIndex 配置
 
 ![image-20210402232055191](https://x.lod.pub:8085/images/2021/04/02/AMS2MgUPGl/image-20210402232055191.png)
 
-### 3. 脚本配置
+### 4. 脚本配置
 
 修改 `PicUploader.py` 中的图床地址
 
@@ -31,7 +33,7 @@ url = 'https://example.com/images' #这里填你 OneIndex 图床服务的地址
 
 
 
-### 4. Typora 配置
+### 5. Typora 配置
 
 #### 添加执行权限(Mac/Linux)
 
@@ -43,7 +45,7 @@ chmod u+x PicUploader.py
 
 
 
-### 5. 测试
+### 6. 测试
 
 点击`验证图片上传选项`按钮进行测试
 
@@ -51,7 +53,7 @@ chmod u+x PicUploader.py
 
 
 
-### 6. 使用
+### 7. 使用
 
 ![image-20210402233611983](https://x.lod.pub:8085/images/2021/04/02/87QbrLdhOP/image-20210402233611983.png)
 

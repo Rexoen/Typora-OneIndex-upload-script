@@ -1,36 +1,27 @@
-#!/usr/bin/python3
-import os, random, sys, requests
-from requests_toolbelt.multipart.encoder import MultipartEncoder
-from lxml import etree
+#!/usr/bin/env python3
+#Author:Rexoen
+
+import requests
+import os
+import re
+import sys
 
 # ============= 请在这里修改配置 =============
 
-url = 'https://example.com/images' #这里填你 OneIndex 图床服务的地址
+URL='https://example.com/images' #这里填你 OneIndex 图床服务的地址
 
 # =========================================
 
-def upload(imgfile):
-    boundary='-----------------------------' + str(random.randint(11819682032731101902815316090, 91819682032731124902815316090 - 1))
-    headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:50.0) Gecko/20100101 Firefox/87.0',
-    'Referer': url,
-    'Content-Type' : 'multipart/form-data;boundary={}'.format(boundary)
-    }
-    
-    multipart_encoder = MultipartEncoder(
-    fields={
-        'file': (os.path.basename(imgfile) , open(imgfile, 'rb'), 'application/octet-stream')
-        },
-        boundary=boundary
-    )
-    
-    headers['Content-Type'] = multipart_encoder.content_type
-    r = requests.post(url, data=multipart_encoder, headers=headers)
-    selector = etree.HTML(r.text)
-    external_link = selector.xpath("/html/body/div/div/div[1]/input/@value")[0]
-    print(external_link)
-    
-if __name__ == "__main__":
-    argvstr = sys.argv[1:]
-    for imgfile in argvstr:
-        upload(imgfile)
+if len(sys.argv) <= 1:
+        print("Please append a picture file path to the command!")
+        sys.exit(1)
+
+filelist = sys.argv[1:]
+
+for filepath in filelist:
+        filename=os.path.basename(filepath)
+        filestream = open(filepath,'rb')
+        r = requests.post(URL,files=dict(file=(filename,filestream)))
+        filestream.close()
+        pic_link = re.search(f'{URL}.+?\.png',r.text)
+        print(pic_link.group(0))
